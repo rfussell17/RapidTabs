@@ -13,6 +13,7 @@ interface Props {
   editQuickLink: (item: QuickLink) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const MainPage = (props: Props) => {
   const styles = makeMainPageStyles();
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 export const NumericSpacer = (props: { size: 2 | 4 | 6 | 8 | 10 }) => {
   const [style, setStyle] = useState({ padding: props.size });

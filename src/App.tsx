@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Typography } from '@material-ui/core';
+
+// import { Typography } from '@material-ui/core';
 import './App.css';
 import { MainPage } from './pages/mainPage/MainPage';
 import { Dictionary, QuickLink } from './core/Types';
