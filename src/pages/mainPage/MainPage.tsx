@@ -4,8 +4,16 @@ import { makeMainPageStyles } from './Styles';
 import icon from '../../assets/Icon.png';
 import { Menu } from '@material-ui/icons';
 import { NumericSpacer } from '../../core/components/Spacers';
+import { Dictionary, QuickLink } from '../../core/Types';
 
-export const MainPage = () => {
+interface Props {
+  quickLinkList: Dictionary<QuickLink>;
+  addQuickLink: (name: string, urlList: string[]) => void;
+  removeQuickLink: (item: QuickLink) => void;
+  editQuickLink: (item: QuickLink) => void;
+}
+
+export const MainPage = (props: Props) => {
   const styles = makeMainPageStyles();
 
   return (
