@@ -2,31 +2,22 @@ import React from 'react';
 import { QuickLinkCard } from '../quickLinkCard/QuickLinkCard';
 import { Grid } from '@material-ui/core';
 import { AddQuickLinkCard } from '../addQuickLinkCard/AddQuickLinkCard';
+import { Dictionary, QuickLink } from '../../Types';
 
-export const QuickLinkCardList = () => {
-  const bookmarkFolders = [
-    { key: '1', name: 'Work', urlList: ['a', 'b'] },
-    { key: '2', name: 'Social', urlList: ['a', 'b'] },
-    { key: '3', name: 'Jobs', urlList: ['a', 'b'] },
-    { key: '4', name: 'Financial', urlList: ['a', 'b'] },
-    { key: '5', name: 'Financial', urlList: ['a', 'b'] },
-    { key: '6', name: 'Financial', urlList: ['a', 'b'] },
-    { key: '7', name: 'Financial', urlList: ['a', 'b'] },
-    { key: '8', name: 'Financial', urlList: ['a', 'b'] },
-    { key: '9', name: 'Financial', urlList: ['a', 'b'] },
-    { key: '10', name: 'Financial', urlList: ['a', 'b'] },
-    { key: '11', name: 'Financial', urlList: ['a', 'b'] },
-    { key: '12', name: 'Financial', urlList: ['a', 'b'] },
-  ];
+interface Props {
+  quickLinkList: Dictionary<QuickLink>;
+  openManager: (quickLink: QuickLink | null) => void;
+}
 
-  const folders = bookmarkFolders.map((folder) => (
-    <QuickLinkCard key={folder.key} name={folder.name} urlList={folder.urlList} />
+export const QuickLinkCardList = (props: Props) => {
+  const folders = Object.values(props.quickLinkList).map((quickLink: QuickLink) => (
+    <QuickLinkCard key={quickLink.key} quickLink={quickLink} openManager={props.openManager} />
   ));
 
   return (
     <Grid container justify="space-between">
       {folders}
-      <AddQuickLinkCard />
+      <AddQuickLinkCard openManager={() => props.openManager(null)} />
     </Grid>
   );
 };

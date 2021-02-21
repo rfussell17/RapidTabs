@@ -18,7 +18,11 @@ export const QuickLinkManager = (props: Props) => {
   const [hasError, setHasError] = useState(false);
   const [newUrl, setNewUrl] = useState<string>('');
   const [isNotValidUrl, setIsNotValidUrl] = useState<Dictionary<boolean>>({});
-  const [quickLink, setQuickLink] = useState<QuickLink>(props.incomingQuickLink || { key: '', name: '', urlList: [] });
+  const [quickLink, setQuickLink] = useState<QuickLink>({ key: '', name: '', urlList: [] });
+
+  useEffect(() => {
+    setQuickLink(props.incomingQuickLink?.key ? { ...props.incomingQuickLink } : { key: '', name: '', urlList: [] });
+  }, [props.incomingQuickLink]);
 
   useEffect(() => {
     const errorList: boolean[] = [];

@@ -18,11 +18,16 @@ export const makeQuickLinkCardStyles = makeStyles(() => ({
 
   header: {
     display: 'flex',
+    flex: 0,
     alignSelf: 'flex-start',
     padding: '0',
+    paddingTop: 10,
+    paddingRight: 10,
   },
   content: {
     display: 'flex',
+    flexDirection: 'row',
+    padding: 0,
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
@@ -34,7 +39,6 @@ export const makeQuickLinkCardStyles = makeStyles(() => ({
   },
 
   iconButton: {
-    padding: '0.75em 0.75em 0 0',
     color: 'rgb(140,60,160)',
     '&:active': {
       // backgroundColor: 'gray',
