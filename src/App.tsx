@@ -11,7 +11,7 @@ import { StorageManager } from './core/storage';
 const storageManager = new StorageManager();
 
 const App = () => {
-  const [quickLinkList, setQuickLinkList] = useState<Dictionary<QuickLink>>({});
+  const [quickLinkList, setQuickLinkList] = useState<Dictionary<QuickLink> | null>(null);
 
   const asyncCallback = async (callback: any) => {
     await callback;
@@ -62,7 +62,7 @@ const App = () => {
   return (
     <div className="App">
       <MainPage
-        quickLinkList={quickLinkList}
+        quickLinkList={quickLinkList || {}}
         addQuickLink={addItem}
         removeQuickLink={removeItem}
         editQuickLink={editItem}
