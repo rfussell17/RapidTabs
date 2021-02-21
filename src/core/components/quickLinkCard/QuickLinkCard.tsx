@@ -10,21 +10,16 @@ interface Props {
 }
 
 export const QuickLinkCard = (props: Props) => {
-  const [editCardFlag, setEditCardFlag] = useState(false);
   const styles = makeQuickLinkCardStyles();
 
   const handleCardOpen = () => {
-    if (editCardFlag === true) {
-      setEditCardFlag(false);
-      return;
-    }
     //TODO open bookmark tabs with chrome extension
     alert('opening bookmark tabs');
   };
 
-  const handleCardEdit = () => {
+  const handleCardEdit = (e: any) => {
     //TODO open edit options, add remove tab Urls
-    setEditCardFlag(true);
+    e.stopPropagation();
     props.openManager(props.quickLink);
   };
 
