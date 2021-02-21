@@ -9,11 +9,10 @@ export const makeQuickLinkCardStyles = makeStyles(() => ({
     margin: '1em .5em',
     '&:hover, &:focus': {
       transition: 'all .2s ease-in-out',
-      transform: 'scale(1.04)',
+      transform: 'scale(1.02)',
       cursor: 'pointer',
-    },
-    '&:active': {
-      backgroundColor: 'gray',
+      backgroundColor: 'rgb(35,30,40)',
+      color: '#37b1dF',
     },
   },
 

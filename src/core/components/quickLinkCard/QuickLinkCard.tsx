@@ -25,7 +25,7 @@ export const QuickLinkCard = (props: QuickLink) => {
   };
 
   return (
-    <Grid item color="indigo">
+    <Grid item>
       <Card onClick={handleCardOpen} className={styles.card}>
         <CardHeader
           className={styles.header}

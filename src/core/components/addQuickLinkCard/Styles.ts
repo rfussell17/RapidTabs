@@ -12,12 +12,12 @@ export const makeAddQuickLinkCardStyles = makeStyles(() => ({
     margin: '1em .5em',
     '&:hover, &:focus': {
       transition: 'all .2s ease-in-out',
-      transform: 'scale(1.04)',
+      transform: 'scale(1.02)',
       cursor: 'pointer',
+      backgroundColor: 'rgb(30,30,45)',
+      color: 'rgb(245,240,250)',
     },
-    '&:active': {
-      backgroundColor: 'gray',
-    },
+
     color: 'white',
   },
 }));
