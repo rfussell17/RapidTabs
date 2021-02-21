@@ -17,6 +17,9 @@
     "persistent": false
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "bookmarks",
+    "tabs",
+    "storage"
   ]
 }
