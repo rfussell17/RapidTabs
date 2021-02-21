@@ -5,3 +5,7 @@ export interface QuickLink {
   name: string;
   urlList: string[];
 }
+
+export enum StorageKey {
+  QUICK_LINK_LIST = 'quickLinkList',
+}
