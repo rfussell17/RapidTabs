@@ -13,8 +13,7 @@ export const QuickLinkCard = (props: Props) => {
   const styles = makeQuickLinkCardStyles();
 
   const handleCardOpen = () => {
-    //TODO open bookmark tabs with chrome extension
-    alert('opening bookmark tabs');
+    chrome.windows.create({ url: props.quickLink.urlList });
   };
 
   const handleCardEdit = (e: any) => {
