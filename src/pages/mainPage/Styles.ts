@@ -33,4 +33,8 @@ export const makeMainPageStyles = makeStyles(() => ({
     width: 32,
     height: 32,
   },
+  body: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
 }));

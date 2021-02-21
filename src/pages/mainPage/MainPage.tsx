@@ -31,39 +31,9 @@ export const MainPage = (props: Props) => {
         </IconButton>
       </Container>
 
-      <Container>
+      <Container className={styles.body}>
         <QuickLinkCardList />
       </Container>
     </Container>
   );
 };
-
-/*
-  const addItem = (item: ListItem) => {
-    const key: string = Helpers.generateKey();
-    const listCopy: Dictionary<ListItem> = { ...itemList };
-    const newItem: ListItem = {
-      ...item,
-      key: key,
-    };
-
-    listCopy[key] = newItem;
-    setItemList(listCopy);
-  }
-
-  const removeItem = (item: ListItem): void => {
-    const listCopy: Dictionary<ListItem> = { ...itemList };
-    delete listCopy[item.key];
-    if (Object.keys(listCopy).length === 0) {
-      cookieManager.remove(CookieKeys.TASK_LIST);
-    }
-    setItemList(listCopy);
-  }
-
-  const editItem = (item: ListItem): void => {
-    const listCopy: Dictionary<ListItem> = { ...itemList };
-    listCopy[item.key] = { ...item };
-    setItemList(listCopy);
-  }
-
- */

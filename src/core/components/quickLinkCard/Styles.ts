@@ -3,12 +3,20 @@ import { makeStyles } from '@material-ui/core';
 export const makeQuickLinkCardStyles = makeStyles(() => ({
   card: {
     backgroundColor: '#fff',
-    width: 300,
-    height: 200,
+    width: 250,
+    height: 150,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: '2em .5em',
+    margin: '1em .5em',
+    '&:hover, &:focus': {
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.04)',
+      cursor: 'pointer',
+    },
+    '&:active': {
+      backgroundColor: 'gray',
+    },
   },
 
   title: {
