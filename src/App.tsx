@@ -1,12 +1,36 @@
-import React, { useState } from 'react';
-import { Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { MainPage } from './pages/mainPage/MainPage';
-import { Dictionary, QuickLink } from './core/Types';
+import { Dictionary, QuickLink, StorageKey } from './core/Types';
 import { Helpers } from './core/Helpers';
+import { StorageManager } from './core/storage';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
+
+/*global chrome*/
+
+const storageManager = new StorageManager();
 
 const App = () => {
-  const [quickLinkList, setQuickLinkList] = useState<Dictionary<QuickLink>>({});
+  const [quickLinkList, setQuickLinkList] = useState<Dictionary<QuickLink> | null>(null);
+
+  const asyncCallback = async (callback: any) => {
+    await callback;
+  };
+
+  useEffect(() => {
+    if (quickLinkList && Object.keys(quickLinkList).length > 0) {
+      asyncCallback(storageManager.set<Dictionary<QuickLink>>(StorageKey.QUICK_LINK_LIST, quickLinkList));
+    }
+
+    if (!quickLinkList) {
+      asyncCallback(
+        storageManager.get<Dictionary<QuickLink>>(StorageKey.QUICK_LINK_LIST, (result: Dictionary<QuickLink>) => {
+          setQuickLinkList(result || {});
+        }),
+      );
+    }
+  }, [quickLinkList]);
 
   const addItem = (name: string, urlList: string[]) => {
     const key: string = Helpers.generateKey();
@@ -25,8 +49,7 @@ const App = () => {
     const listCopy: Dictionary<QuickLink> = { ...quickLinkList };
     delete listCopy[item.key];
     if (Object.keys(listCopy).length === 0) {
-      // TODO: ADD STORAGE MANAGER.
-      // cookieManager.remove(CookieKeys.TASK_LIST);
+      asyncCallback(asyncCallback(storageManager.remove(StorageKey.QUICK_LINK_LIST)));
     }
     setQuickLinkList(listCopy);
   };
@@ -39,12 +62,14 @@ const App = () => {
 
   return (
     <div className="App">
-      <MainPage
-        quickLinkList={quickLinkList}
-        addQuickLink={addItem}
-        removeQuickLink={removeItem}
-        editQuickLink={editItem}
-      />
+      <ThemeProvider theme={theme}>
+        <MainPage
+          quickLinkList={quickLinkList || {}}
+          addQuickLink={addItem}
+          removeQuickLink={removeItem}
+          editQuickLink={editItem}
+        />
+      </ThemeProvider>
     </div>
   );
 };

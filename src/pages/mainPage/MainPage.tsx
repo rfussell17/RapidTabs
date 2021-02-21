@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, IconButton, Typography } from '@material-ui/core';
 import { makeMainPageStyles } from './Styles';
 import icon from '../../assets/Icon.png';
 import { Menu } from '@material-ui/icons';
 import { NumericSpacer } from '../../core/components/Spacers';
+import { QuickLinkCardList } from '../../core/components/quickLinkCardList/QuickLinkCardList';
 import { Dictionary, QuickLink } from '../../core/Types';
+import { QuickLinkManager } from '../../core/components/quickLinkManager/QuickLinkManager';
 
 interface Props {
   quickLinkList: Dictionary<QuickLink>;
@@ -13,7 +15,10 @@ interface Props {
   editQuickLink: (item: QuickLink) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const MainPage = (props: Props) => {
+  const [isManagerOpen, setIsManagerOpen] = useState(false);
+  const [quickLinkToEdit, setQuickLinkToEdit] = useState<QuickLink | null>(null);
   const styles = makeMainPageStyles();
 
   return (
@@ -29,7 +34,23 @@ export const MainPage = (props: Props) => {
         </IconButton>
       </Container>
 
-      <Container>{/* TODO: Put List here */}</Container>
+      <Container className={styles.body}>
+        <QuickLinkCardList
+          quickLinkList={props.quickLinkList}
+          openManager={(quickLink: QuickLink | null) => {
+            setQuickLinkToEdit(quickLink);
+            setIsManagerOpen(true);
+          }}
+        />
+      </Container>
+      <QuickLinkManager
+        isOpen={isManagerOpen}
+        closeModal={() => setIsManagerOpen(false)}
+        removeQuickLink={props.removeQuickLink}
+        editQuickLink={props.editQuickLink}
+        addQuickLink={props.addQuickLink}
+        incomingQuickLink={quickLinkToEdit}
+      />
     </Container>
   );
 };
