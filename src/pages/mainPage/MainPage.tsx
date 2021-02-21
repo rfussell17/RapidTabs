@@ -17,7 +17,7 @@ interface Props {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const MainPage = (props: Props) => {
-  const [isManagerOpen, setIsManagerOpen] = useState(true);
+  const [isManagerOpen, setIsManagerOpen] = useState(false);
   const [quickLinkToEdit, setQuickLinkToEdit] = useState<QuickLink | null>(null);
   const styles = makeMainPageStyles();
 
@@ -35,7 +35,13 @@ export const MainPage = (props: Props) => {
       </Container>
 
       <Container className={styles.body}>
-        <QuickLinkCardList />
+        <QuickLinkCardList
+          quickLinkList={props.quickLinkList}
+          openManager={(quickLink: QuickLink | null) => {
+            setQuickLinkToEdit(quickLink);
+            setIsManagerOpen(true);
+          }}
+        />
       </Container>
       <QuickLinkManager
         isOpen={isManagerOpen}

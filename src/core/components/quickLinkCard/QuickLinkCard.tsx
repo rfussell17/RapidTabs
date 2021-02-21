@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeQuickLinkCardStyles } from './Styles';
 import { Card, CardContent, CardHeader, Grid, IconButton, Typography } from '@material-ui/core';
 import { QuickLink } from '../../Types';
 import Create from '@material-ui/icons/Create';
 
-export const QuickLinkCard = (props: QuickLink) => {
+interface Props {
+  quickLink: QuickLink;
+  openManager: (quickLink: QuickLink) => void;
+}
+
+export const QuickLinkCard = (props: Props) => {
+  const [editCardFlag, setEditCardFlag] = useState(false);
   const styles = makeQuickLinkCardStyles();
 
-  let editClickFlag = false;
-
   const handleCardOpen = () => {
-    if (editClickFlag === true) {
-      editClickFlag = false;
+    if (editCardFlag === true) {
+      setEditCardFlag(false);
       return;
     }
     //TODO open bookmark tabs with chrome extension
@@ -20,8 +24,8 @@ export const QuickLinkCard = (props: QuickLink) => {
 
   const handleCardEdit = () => {
     //TODO open edit options, add remove tab Urls
-    alert('open edit options');
-    editClickFlag = true;
+    setEditCardFlag(true);
+    props.openManager(props.quickLink);
   };
 
   return (
@@ -37,7 +41,7 @@ export const QuickLinkCard = (props: QuickLink) => {
         />
         <CardContent className={styles.content}>
           <Typography variant="h4" component="h2" className={styles.title}>
-            {props.name}
+            {props.quickLink.name}
           </Typography>
         </CardContent>
       </Card>
