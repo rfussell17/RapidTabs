@@ -31,23 +31,14 @@ export const makeQuickLinkCardStyles = makeStyles(() => ({
     display: 'flex',
     alignSelf: 'flex-start',
     color: '#37b1cc',
-    fontWeight: 'bold',
+    fontWeight: 'normal',
   },
 
   iconButton: {
     padding: '0.75em 0.75em 0 0',
     color: 'rgb(140,60,160)',
     '&:active': {
-      backgroundColor: 'gray',
+      // backgroundColor: 'gray',
     },
   },
-  plus: {
-    margin: '0 auto',
-    padding: '0',
-    color: '#FFCA28',
-    display: 'flex',
-    justifySelf: 'center',
-    alignSelf: 'center',
-  },
-  // card:last
 }));
