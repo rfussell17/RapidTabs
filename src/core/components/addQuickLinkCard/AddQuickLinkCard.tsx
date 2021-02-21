@@ -11,7 +11,7 @@ export const AddQuickLinkCard = () => {
   };
   return (
     <Grid item>
-      <Card onClick={handleAddCard} className={styles.card}>
+      <Card elevation={24} onClick={handleAddCard} className={styles.card}>
         <CardContent>
           <Typography variant="h2" component="h2">
             +
