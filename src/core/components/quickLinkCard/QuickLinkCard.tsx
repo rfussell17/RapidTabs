@@ -4,7 +4,12 @@ import { Card, CardContent, CardHeader, Grid, IconButton, Typography } from '@ma
 import { QuickLink } from '../../Types';
 import Create from '@material-ui/icons/Create';
 
-export const QuickLinkCard = (props: QuickLink) => {
+interface Props {
+  quickLink: QuickLink;
+  openModal: (quickLink?: QuickLink) => void;
+}
+
+export const QuickLinkCard = (props: Props) => {
   const styles = makeQuickLinkCardStyles();
 
   let editClickFlag = false;
@@ -22,6 +27,8 @@ export const QuickLinkCard = (props: QuickLink) => {
     //TODO open edit options, add remove tab Urls
     alert('open edit options');
     editClickFlag = true;
+
+    props.openModal();
   };
 
   return (
@@ -37,7 +44,7 @@ export const QuickLinkCard = (props: QuickLink) => {
         />
         <CardContent className={styles.content}>
           <Typography variant="h4" component="h2" className={styles.title}>
-            {props.name}
+            {props.quickLink.name}
           </Typography>
         </CardContent>
       </Card>

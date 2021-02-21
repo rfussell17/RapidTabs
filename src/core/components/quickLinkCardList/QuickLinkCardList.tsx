@@ -2,8 +2,13 @@ import React from 'react';
 import { QuickLinkCard } from '../quickLinkCard/QuickLinkCard';
 import { Grid } from '@material-ui/core';
 import { AddQuickLinkCard } from '../addQuickLinkCard/AddQuickLinkCard';
+import { QuickLink } from '../../Types';
 
-export const QuickLinkCardList = () => {
+interface Props {
+  openModal: (quickLink?: QuickLink) => void;
+}
+
+export const QuickLinkCardList = (props: Props) => {
   const bookmarkFolders = [
     { key: '1', name: 'Work', urlList: ['a', 'b'] },
     { key: '2', name: 'Social', urlList: ['a', 'b'] },
@@ -20,7 +25,11 @@ export const QuickLinkCardList = () => {
   ];
 
   const folders = bookmarkFolders.map((folder) => (
-    <QuickLinkCard key={folder.key} name={folder.name} urlList={folder.urlList} />
+    <QuickLinkCard
+      key={folder.key}
+      quickLink={{ key: folder.key, name: folder.name, urlList: folder.urlList }}
+      openModal={props.openModal}
+    />
   ));
 
   return (
