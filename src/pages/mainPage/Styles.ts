@@ -1,4 +1,4 @@
-import { colors, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 export const makeMainPageStyles = makeStyles(() => ({
   mainContainer: {
@@ -15,6 +15,7 @@ export const makeMainPageStyles = makeStyles(() => ({
     justifyContent: 'space-between',
     padding: 50,
     flex: 1,
+    color: '#35879A',
   },
   headerLeft: {
     display: 'flex',
@@ -22,7 +23,7 @@ export const makeMainPageStyles = makeStyles(() => ({
     alignItems: 'center',
   },
   rapidTabsIcon: {
-    width: 100,
+    width: 50,
   },
   iconButton: {
     width: 32,
@@ -32,5 +33,9 @@ export const makeMainPageStyles = makeStyles(() => ({
   icon: {
     width: 32,
     height: 32,
+  },
+  body: {
+    display: 'flex',
+    justifyContent: 'center',
   },
 }));

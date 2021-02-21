@@ -4,6 +4,7 @@ import { makeMainPageStyles } from './Styles';
 import icon from '../../assets/Icon.png';
 import { Menu } from '@material-ui/icons';
 import { NumericSpacer } from '../../core/components/Spacers';
+import { QuickLinkCardList } from '../../core/components/quickLinkCardList/QuickLinkCardList';
 import { Dictionary, QuickLink } from '../../core/Types';
 import { QuickLinkManager } from '../../core/components/quickLinkManager/QuickLinkManager';
 
@@ -14,6 +15,7 @@ interface Props {
   editQuickLink: (item: QuickLink) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const MainPage = (props: Props) => {
   const [isManagerOpen, setIsManagerOpen] = useState(true);
   const [quickLinkToEdit, setQuickLinkToEdit] = useState<QuickLink | null>(null);
@@ -32,7 +34,9 @@ export const MainPage = (props: Props) => {
         </IconButton>
       </Container>
 
-      <Container>{/* TODO: Put List here */}</Container>
+      <Container className={styles.body}>
+        <QuickLinkCardList />
+      </Container>
       <QuickLinkManager
         isOpen={isManagerOpen}
         closeModal={() => setIsManagerOpen(false)}
