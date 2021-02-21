@@ -15,11 +15,8 @@ interface Props {
 }
 
 export const MainPage = (props: Props) => {
-  const [quickLinkToEdit, setQuickLinkToEdit] = useState<QuickLink | null>({
-    key: 'asd',
-    name: 'entertainment',
-    urlList: ['www.youtube.com', 'www.facebook.com', 'wwww.netflix.com', 'www.pornhub.com'],
-  });
+  const [isManagerOpen, setIsManagerOpen] = useState(true);
+  const [quickLinkToEdit, setQuickLinkToEdit] = useState<QuickLink | null>(null);
   const styles = makeMainPageStyles();
 
   return (
@@ -37,7 +34,8 @@ export const MainPage = (props: Props) => {
 
       <Container>{/* TODO: Put List here */}</Container>
       <QuickLinkManager
-        closeModal={() => null}
+        isOpen={isManagerOpen}
+        closeModal={() => setIsManagerOpen(false)}
         removeQuickLink={props.removeQuickLink}
         editQuickLink={props.editQuickLink}
         addQuickLink={props.addQuickLink}

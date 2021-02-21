@@ -40,10 +40,17 @@ export const makeQuickLinkManagerStyle = makeStyles(() => ({
     width: 32,
     height: 32,
   },
-  header: {
+  headerEdit: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingLeft: 20,
+    paddingRight: 10,
+  },
+  headerCreate: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     paddingLeft: 20,
     paddingRight: 10,
   },

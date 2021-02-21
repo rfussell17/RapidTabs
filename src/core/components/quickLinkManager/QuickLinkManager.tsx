@@ -6,6 +6,7 @@ import { NumericSpacer } from '../Spacers';
 import { makeQuickLinkManagerStyle } from './Style';
 
 interface Props {
+  isOpen: boolean;
   addQuickLink: (name: string, urlList: string[]) => void;
   removeQuickLink: (item: QuickLink) => void;
   editQuickLink: (item: QuickLink) => void;
@@ -14,9 +15,22 @@ interface Props {
 }
 export const QuickLinkManager = (props: Props) => {
   const [bottomScrollRef] = useState(useRef<null | HTMLDivElement>(null));
+  const [hasError, setHasError] = useState(false);
   const [newUrl, setNewUrl] = useState<string>('');
   const [isNotValidUrl, setIsNotValidUrl] = useState<Dictionary<boolean>>({});
   const [quickLink, setQuickLink] = useState<QuickLink>(props.incomingQuickLink || { key: '', name: '', urlList: [] });
+
+  useEffect(() => {
+    const errorList: boolean[] = [];
+
+    Object.values(isNotValidUrl).forEach((value) => {
+      if (!!value) {
+        errorList.push(value);
+      }
+    });
+
+    setHasError(errorList.length > 0);
+  }, [isNotValidUrl]);
 
   const style = makeQuickLinkManagerStyle();
 
@@ -29,16 +43,13 @@ export const QuickLinkManager = (props: Props) => {
       setIsNotValidUrl(copyIsNotValid);
     }
 
-    if (index) {
-      console.log('HELLLooooooo');
+    if (index != undefined) {
       const copyList = [...quickLink.urlList];
       copyList[index] = text;
       setQuickLink({ ...quickLink, urlList: copyList });
       copyIsNotValid[index] = !isValid;
       setIsNotValidUrl(copyIsNotValid);
     }
-
-    console.log('is not valid', isNotValidUrl);
   };
 
   const scrollToBottom = () => {
@@ -52,16 +63,51 @@ export const QuickLinkManager = (props: Props) => {
     }
   }, []);
 
+  const resetState = () => {
+    setIsNotValidUrl({});
+    setNewUrl('');
+    setQuickLink(props.incomingQuickLink || { key: '', name: '', urlList: [] });
+  };
+
   const handleCancel = () => {
-    console.log('CANCEL');
+    resetState();
+    props.closeModal();
+  };
+
+  const handleDeleteQuickLink = () => {
+    resetState();
+    props.removeQuickLink(quickLink);
+    props.closeModal();
+  };
+
+  const handleRemoveURLFromList = (index: number) => {
+    const copyList = [...quickLink.urlList];
+    copyList.splice(index, 1);
+    setQuickLink({ ...quickLink, urlList: copyList });
+
+    const copyisNotValidUrl = { ...isNotValidUrl };
+    delete copyisNotValidUrl[index];
+
+    Object.keys(copyisNotValidUrl).forEach((key) => {
+      if (key !== 'new' && Number(key) > index) {
+        copyisNotValidUrl[Number(key) - 1] = copyisNotValidUrl[key];
+        delete copyisNotValidUrl[key];
+      }
+    });
+
+    setIsNotValidUrl(copyisNotValidUrl);
   };
 
   const handleSubmit = () => {
+    const newUrlList = newUrl !== '' ? [...quickLink.urlList, newUrl] : quickLink.urlList;
+
     if (props.incomingQuickLink) {
-      props.editQuickLink({ ...quickLink });
+      props.editQuickLink({ ...quickLink, urlList: newUrlList });
     } else {
-      props.addQuickLink(quickLink.name, [...quickLink.urlList, newUrl]);
+      props.addQuickLink(quickLink.name, newUrlList);
     }
+
+    resetState();
   };
 
   const validateURL = (text: string) => {
@@ -73,17 +119,19 @@ export const QuickLinkManager = (props: Props) => {
 
   return (
     <Container className={style.container}>
-      <Modal disableAutoFocus={true} style={{ outline: 'none' }} open>
+      <Modal disableAutoFocus={true} style={{ outline: 'none' }} open={props.isOpen}>
         <div className={style.container}>
           <Paper className={style.paperContainer}>
-            <div className={style.header}>
-              <IconButton>
+            <div className={props.incomingQuickLink ? style.headerEdit : style.headerCreate}>
+              <IconButton onClick={handleCancel}>
                 <KeyboardBackspace />
               </IconButton>
               <Typography variant={'h4'}>{props.incomingQuickLink ? 'Edit' : 'Create'} Quick Link</Typography>
-              <IconButton>
-                <DeleteForever />
-              </IconButton>
+              {props.incomingQuickLink ? (
+                <IconButton onClick={handleDeleteQuickLink}>
+                  <DeleteForever />
+                </IconButton>
+              ) : null}
             </div>
             <NumericSpacer size={20} />
             <Container className={style.body}>
@@ -97,13 +145,13 @@ export const QuickLinkManager = (props: Props) => {
               />
               {quickLink.urlList.map((url: string, index: number) => (
                 <TextField
-                  key={url}
+                  key={index}
                   className={style.textField}
                   label="url"
                   value={url}
                   InputProps={{
                     endAdornment: (
-                      <IconButton>
+                      <IconButton onClick={() => handleRemoveURLFromList(index)}>
                         <Clear />
                       </IconButton>
                     ),
@@ -148,7 +196,7 @@ export const QuickLinkManager = (props: Props) => {
                 CANCEL
               </Button>
               <NumericSpacer size={20} />
-              <Button color="primary" variant="contained" onClick={handleSubmit}>
+              <Button color="primary" variant="contained" onClick={handleSubmit} disabled={hasError}>
                 SAVE
               </Button>
             </div>
