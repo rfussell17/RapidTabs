@@ -29,7 +29,7 @@ export const QuickLinkCard = (props: QuickLink) => {
           }
         />
         <CardContent className={styles.content}>
-          <Typography variant="h4" component="h2" className={styles.title} color="textPrimary">
+          <Typography variant="h4" component="h2" className={styles.title}>
             {props.name}
           </Typography>
         </CardContent>
