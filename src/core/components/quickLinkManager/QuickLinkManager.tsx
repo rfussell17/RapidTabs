@@ -139,7 +139,6 @@ export const QuickLinkManager = (props: Props) => {
             <NumericSpacer size={20} />
             <Container className={style.body}>
               <TextField
-                required
                 label="name"
                 className={style.textField}
                 value={quickLink.name}
@@ -199,7 +198,7 @@ export const QuickLinkManager = (props: Props) => {
                 CANCEL
               </Button>
               <NumericSpacer size={20} />
-              <Button className={style.save} onClick={handleSubmit} disabled={hasError}>
+              <Button className={style.save} onClick={handleSubmit} disabled={hasError || quickLink.name === ''}>
                 SAVE
               </Button>
             </div>
