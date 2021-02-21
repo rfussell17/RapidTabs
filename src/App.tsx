@@ -11,25 +11,25 @@ import { StorageManager } from './core/storage';
 const storageManager = new StorageManager();
 
 const App = () => {
-  const [quickLinkList, setQuickLinkList] = useState<Dictionary<QuickLink> | null>(null);
+  const [quickLinkList, setQuickLinkList] = useState<Dictionary<QuickLink> | null>({});
 
   const asyncCallback = async (callback: any) => {
     await callback;
   };
 
-  useEffect(() => {
-    if (!quickLinkList) {
-      asyncCallback(
-        storageManager.get<Dictionary<QuickLink>>(StorageKey.QUICK_LINK_LIST, (result) => {
-          setQuickLinkList(result || {});
-        }),
-      );
-    }
+  // useEffect(() => {
+  //   if (!quickLinkList) {
+  //     asyncCallback(
+  //       storageManager.get<Dictionary<QuickLink>>(StorageKey.QUICK_LINK_LIST, (result) => {
+  //         setQuickLinkList(result || {});
+  //       }),
+  //     );
+  //   }
 
-    if (quickLinkList && Object.keys(quickLinkList).length > 0) {
-      asyncCallback(storageManager.set<Dictionary<QuickLink>>(StorageKey.QUICK_LINK_LIST, quickLinkList));
-    }
-  }, [quickLinkList]);
+  //   if (quickLinkList && Object.keys(quickLinkList).length > 0) {
+  //     asyncCallback(storageManager.set<Dictionary<QuickLink>>(StorageKey.QUICK_LINK_LIST, quickLinkList));
+  //   }
+  // }, [quickLinkList]);
 
   const addItem = (name: string, urlList: string[]) => {
     const key: string = Helpers.generateKey();
@@ -48,7 +48,7 @@ const App = () => {
     const listCopy: Dictionary<QuickLink> = { ...quickLinkList };
     delete listCopy[item.key];
     if (Object.keys(listCopy).length === 0) {
-      asyncCallback(asyncCallback(storageManager.remove(StorageKey.QUICK_LINK_LIST)));
+      // asyncCallback(asyncCallback(storageManager.remove(StorageKey.QUICK_LINK_LIST)));
     }
     setQuickLinkList(listCopy);
   };
