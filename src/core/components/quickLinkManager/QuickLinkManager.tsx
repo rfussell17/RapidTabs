@@ -135,6 +135,7 @@ export const QuickLinkManager = (props: Props) => {
             <NumericSpacer size={20} />
             <Container className={style.body}>
               <TextField
+                required
                 label="name"
                 className={style.textField}
                 value={quickLink.name}
