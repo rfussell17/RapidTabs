@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, IconButton, Typography } from '@material-ui/core';
 import { makeMainPageStyles } from './Styles';
 import icon from '../../assets/Icon.png';
 import { Menu } from '@material-ui/icons';
 import { NumericSpacer } from '../../core/components/Spacers';
 import { Dictionary, QuickLink } from '../../core/Types';
+import { QuickLinkManager } from '../../core/components/quickLinkManager/QuickLinkManager';
 
 interface Props {
   quickLinkList: Dictionary<QuickLink>;
@@ -14,6 +15,8 @@ interface Props {
 }
 
 export const MainPage = (props: Props) => {
+  const [isManagerOpen, setIsManagerOpen] = useState(true);
+  const [quickLinkToEdit, setQuickLinkToEdit] = useState<QuickLink | null>(null);
   const styles = makeMainPageStyles();
 
   return (
@@ -30,6 +33,14 @@ export const MainPage = (props: Props) => {
       </Container>
 
       <Container>{/* TODO: Put List here */}</Container>
+      <QuickLinkManager
+        isOpen={isManagerOpen}
+        closeModal={() => setIsManagerOpen(false)}
+        removeQuickLink={props.removeQuickLink}
+        editQuickLink={props.editQuickLink}
+        addQuickLink={props.addQuickLink}
+        incomingQuickLink={quickLinkToEdit}
+      />
     </Container>
   );
 };
