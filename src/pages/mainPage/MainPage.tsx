@@ -4,6 +4,7 @@ import { makeMainPageStyles } from './Styles';
 import icon from '../../assets/Icon.png';
 import { Menu } from '@material-ui/icons';
 import { NumericSpacer } from '../../core/components/Spacers';
+import { QuickLinkCardList } from '../../core/components/quickLinkCardList/QuickLinkCardList';
 import { Dictionary, QuickLink } from '../../core/Types';
 
 interface Props {
@@ -30,7 +31,39 @@ export const MainPage = (props: Props) => {
         </IconButton>
       </Container>
 
-      <Container>{/* TODO: Put List here */}</Container>
+      <Container>
+        <QuickLinkCardList />
+      </Container>
     </Container>
   );
 };
+
+/*
+  const addItem = (item: ListItem) => {
+    const key: string = Helpers.generateKey();
+    const listCopy: Dictionary<ListItem> = { ...itemList };
+    const newItem: ListItem = {
+      ...item,
+      key: key,
+    };
+
+    listCopy[key] = newItem;
+    setItemList(listCopy);
+  }
+
+  const removeItem = (item: ListItem): void => {
+    const listCopy: Dictionary<ListItem> = { ...itemList };
+    delete listCopy[item.key];
+    if (Object.keys(listCopy).length === 0) {
+      cookieManager.remove(CookieKeys.TASK_LIST);
+    }
+    setItemList(listCopy);
+  }
+
+  const editItem = (item: ListItem): void => {
+    const listCopy: Dictionary<ListItem> = { ...itemList };
+    listCopy[item.key] = { ...item };
+    setItemList(listCopy);
+  }
+
+ */
