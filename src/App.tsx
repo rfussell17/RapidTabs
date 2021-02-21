@@ -55,7 +55,6 @@ const App = () => {
 
   const editItem = (item: QuickLink): void => {
     const listCopy: Dictionary<QuickLink> = { ...quickLinkList };
-    console.log(item);
     listCopy[item.key] = { ...item };
     setQuickLinkList(listCopy);
   };
