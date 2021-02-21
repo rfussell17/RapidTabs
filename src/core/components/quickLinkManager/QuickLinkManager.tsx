@@ -57,7 +57,6 @@ export const QuickLinkManager = (props: Props) => {
   };
 
   useEffect(() => {
-    console.log(bottomScrollRef);
     if (bottomScrollRef !== null) {
       scrollToBottom();
     }
