@@ -13,7 +13,13 @@ export const QuickLinkCard = (props: Props) => {
   const styles = makeQuickLinkCardStyles();
 
   const handleCardOpen = () => {
-    chrome.windows.create({ url: props.quickLink.urlList });
+    const fixedURLs = props.quickLink.urlList.map((url) => {
+      if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
+        url = 'http://' + url;
+      }
+      return url;
+    });
+    chrome.windows.create({ url: fixedURLs });
   };
 
   const handleCardEdit = (e: any) => {
