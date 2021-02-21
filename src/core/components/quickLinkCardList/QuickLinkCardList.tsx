@@ -1,7 +1,7 @@
 import React from 'react';
-
 import { QuickLinkCard } from '../quickLinkCard/QuickLinkCard';
 import { Grid } from '@material-ui/core';
+import { AddQuickLinkCard } from '../quickLinkCard/AddQuickLinkCard';
 
 export const QuickLinkCardList = () => {
   const bookmarkFolders = [
@@ -26,6 +26,7 @@ export const QuickLinkCardList = () => {
   return (
     <Grid container justify="space-between">
       {folders}
+      <AddQuickLinkCard />
     </Grid>
   );
 };

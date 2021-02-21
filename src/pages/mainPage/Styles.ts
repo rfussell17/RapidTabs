@@ -15,6 +15,7 @@ export const makeMainPageStyles = makeStyles(() => ({
     justifyContent: 'space-between',
     padding: 50,
     flex: 1,
+    color: '#35879A',
   },
   headerLeft: {
     display: 'flex',
@@ -22,7 +23,7 @@ export const makeMainPageStyles = makeStyles(() => ({
     alignItems: 'center',
   },
   rapidTabsIcon: {
-    width: 100,
+    width: 50,
   },
   iconButton: {
     width: 32,
