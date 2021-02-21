@@ -173,7 +173,6 @@ export const QuickLinkManager = (props: Props) => {
                   endAdornment: (
                     <IconButton
                       onClick={() => {
-                        // TODO: add validation
                         if (newUrl !== '') {
                           setQuickLink({ ...quickLink, urlList: [...quickLink.urlList, newUrl] });
                           setNewUrl('');
