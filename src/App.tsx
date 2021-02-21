@@ -4,6 +4,8 @@ import { MainPage } from './pages/mainPage/MainPage';
 import { Dictionary, QuickLink, StorageKey } from './core/Types';
 import { Helpers } from './core/Helpers';
 import { StorageManager } from './core/storage';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
 
 /*global chrome*/
 
@@ -60,12 +62,14 @@ const App = () => {
 
   return (
     <div className="App">
-      <MainPage
-        quickLinkList={quickLinkList || {}}
-        addQuickLink={addItem}
-        removeQuickLink={removeItem}
-        editQuickLink={editItem}
-      />
+      <ThemeProvider theme={theme}>
+        <MainPage
+          quickLinkList={quickLinkList || {}}
+          addQuickLink={addItem}
+          removeQuickLink={removeItem}
+          editQuickLink={editItem}
+        />
+      </ThemeProvider>
     </div>
   );
 };
